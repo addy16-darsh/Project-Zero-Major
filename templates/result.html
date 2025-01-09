@@ -3,28 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detection Result</title>
+    <title>DeepFake Detection Result</title>
 </head>
 <body>
-    <h1>DeepFake Detection Result</h1>
+    <h1>DeepFake Detection Results</h1>
 
     <h2>Prediction: {{ prediction }}</h2>
-
-    <h3>Prediction Breakdown:</h3>
+    <p>Real vs. DeepFake Prediction Counts:</p>
     <ul>
         {% for label, count in counts.items() %}
             <li>{{ label }}: {{ count }}</li>
         {% endfor %}
     </ul>
 
-    <h3>Generated Heatmaps:</h3>
-    <div>
-        {% for i in range(5) %}
-            <img src="{{ url_for('static', filename='heatmap_{{i}}.jpg') }}" alt="Heatmap {{i}}">
-        {% endfor %}
-    </div>
-
-    <br>
-    <a href="/">Upload Another Video</a>
+    <br><br>
+    <a href="/">Upload another video</a>
 </body>
 </html>
+
