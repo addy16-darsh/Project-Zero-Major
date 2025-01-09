@@ -1,16 +1,17 @@
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        video_file = request.files['video']
-        if video_file:
-            video_path = os.path.join(UPLOAD_FOLDER, video_file.filename)
-            video_file.save(video_path)
-            final_prediction, prediction_counts = process_video(video_path, MODEL_PATH)
-            
-            os.remove(video_path)  
-            clear_folder(PROCESSED_FRAMES_FOLDER)
-            clear_folder(HEATMAP_FOLDER)
-
-            return render_template('result.html', prediction=final_prediction, counts=prediction_counts)
-    
-    return render_template('upload.html')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Detection</title>
+</head>
+<body>
+    <h1>Upload a Video for DeepFake Detection</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <label for="video">Choose a video:</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+        <br><br>
+        <button type="submit">Upload Video</button>
+    </form>
+</body>
+</html>
