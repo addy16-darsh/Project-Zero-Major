@@ -1,8 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-      <meta http-equiv="refresh" content="0; url=upload.html">
-  </head>
-  <body>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Video Detector</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>DeepFake Video Detector</h1>
+    <h2>Upload a Video for DeepFake Detection</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="video" accept="video/*" required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+</body>
 </html>
