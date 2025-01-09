@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Video Detector</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        .frame-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .frame-container img {
+            margin: 10px;
+            width: 200px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        /* Loading screen styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 9999;
+        }
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p>Processing your video...</p>
+    </div>
+
+    <!-- Result content (hidden initially) -->
+    <div id="result-content" style="display:none;">
+        <h2>DeepFake Detection Results</h2>
+        <p><strong>Final Prediction:</strong> {{ prediction }}</p>
+        <h3>Prediction Counts:</h3>
+        <ul>
+            {% for label, count in counts.items() %}
+                <li>{{ label }}: {{ count }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h3>Heatmap Imposed Frames:</h3>
+        <div class="frame-container">
+            {% for heatmap in heatmaps %}
+                <img src="{{ url_for('get_heatmap', filename=heatmap) }}" alt="Heatmap Image">
+            {% endfor %}
+        </div>
+
+        <br><br>
+        <a href="/">Upload Another Video</a>
+    </div>
+
+    <script>
+        // Function to hide the loading screen and show the results
+        function showResults() {
+            document.getElementById("loading-screen").style.display = "none";
+            document.getElementById("result-content").style.display = "block";
+        }
+
+        // Simulate processing time before showing results
+        setTimeout(showResults, 3000);  // 3 seconds delay (adjust as needed)
+    </script>
+</body>
+</html>
