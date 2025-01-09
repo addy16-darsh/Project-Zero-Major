@@ -3,42 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepFake Detection Results</title>
-    <style>
-        body {
-            text-align: center;
-        }
-        .frame-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .frame-container img {
-            margin: 10px;
-            width: 200px;
-            height: auto;
-        }
-    </style>
+    <title>Detection Result</title>
 </head>
 <body>
-    <h2>DeepFake Detection Results</h2>
-    <p><strong>Final Prediction:</strong> {{ prediction }}</p>
+    <h1>DeepFake Detection Result</h1>
 
-    <h3>Prediction Counts:</h3>
+    <h2>Prediction: {{ prediction }}</h2>
+
+    <h3>Prediction Breakdown:</h3>
     <ul>
         {% for label, count in counts.items() %}
             <li>{{ label }}: {{ count }}</li>
         {% endfor %}
     </ul>
 
-    <h3>Heatmap Imposed Frames:</h3>
-    <div class="frame-container">
-        {% for heatmap in heatmaps %}
-            <img src="{{ url_for('static', filename=heatmap) }}" alt="Heatmap Image">
+    <h3>Generated Heatmaps:</h3>
+    <div>
+        {% for i in range(5) %}
+            <img src="{{ url_for('static', filename='heatmap_{{i}}.jpg') }}" alt="Heatmap {{i}}">
         {% endfor %}
     </div>
 
-    <br><br>
+    <br>
     <a href="/">Upload Another Video</a>
 </body>
 </html>
