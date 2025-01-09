@@ -154,5 +154,7 @@ def upload_file():
     return render_template('upload.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Comment out the app.run() line as Gunicorn will run the app in production
+    pass
+
 
