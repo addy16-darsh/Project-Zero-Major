@@ -1,9 +1,4 @@
-flask
-flask-cors
-torch
-torchvision
-timm
+streamlit
+pandas
 numpy
-opencv-python
-pillow
-gunicorn
+scikit-learn
